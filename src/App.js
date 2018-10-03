@@ -12,12 +12,16 @@ class App extends Component {
     ]
   };
 
+  handleDelete = event => {
+    console.log("DELETE");
+  };
+
   handleChange = event => {
     this.setState({ newTodo: event.target.value });
   };
 
   handleSubmit = event => {
-    event.preventDefault()
+    event.preventDefault();
     this.setState({
       todos: [...this.state.todos, this.state.newTodo],
       newTodo: ""
@@ -29,7 +33,12 @@ class App extends Component {
       <div>
         <h1> How to make boba at home</h1>
         {this.state.todos.map(todo => (
-          <li key={todo}> {todo}</li>
+          <div>
+            <li key={todo}>
+              {todo + " "}
+              <button onClick={this.handleDelete()}>X</button>
+            </li>
+          </div>
         ))}
         <form onSubmit={this.handleSubmit}>
           <input
