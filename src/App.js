@@ -12,6 +12,18 @@ class App extends Component {
     ]
   };
 
+  handleChange = event => {
+    this.setState({ newTodo: event.target.value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault()
+    this.setState({
+      todos: [...this.state.todos, this.state.newTodo],
+      newTodo: ""
+    });
+  };
+
   render() {
     return (
       <div>
@@ -19,6 +31,14 @@ class App extends Component {
         {this.state.todos.map(todo => (
           <li key={todo}> {todo}</li>
         ))}
+        <form onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            value={this.state.newTodo}
+            onChange={this.handleChange}
+          />
+          <button onClick={this.handleSubmit}> + </button>
+        </form
       </div>
     );
   }
